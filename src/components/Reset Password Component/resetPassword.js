@@ -4,13 +4,14 @@ import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
 import eTaxLogo from "../../images/eTax New logo.svg";
 import api from "../../api"; // make sure the path matches your project structure
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,16 +19,16 @@ const ResetPassword = () => {
     setError("");
 
     try {
-      const response = await api.post("/resetpassword", { email });
+      const response = await api.post("/forgot-password", { email });
       setMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
       localStorage.setItem('resetEmail', email);
       setTimeout(() => {
-        navigate('/passwordchange');
+        navigate(`/passwordchange?token=${response.data.token}`);
       }, 1500);
     } catch (err) {
       if (err.response && err.response.status === 404) {
         setError("البريد الإلكتروني غير مسجل.");
-      } else {  
+      } else {
         setError("حدث خطأ. حاول مرة أخرى.");
       }
     }
@@ -48,7 +49,7 @@ const ResetPassword = () => {
           <div className="resetpassword-header">
             <img src={combinedLogo} alt="combined logo" className="resetpassword-combined-logo" draggable="false" />
             <h1 className="resetpassword-title-text">بوابة الموظف</h1>
-            <div className="resetpassword-subtitle-text">للإستعلام عن تفاصيل الأجور الشهرية</div>
+            <div className="resetpassword-subtitle-text">إعادة تعيين كلمة المرور</div>
           </div>
           <form className="resetpassword-form" onSubmit={handleSubmit} autoComplete="off">
             <input
@@ -61,13 +62,10 @@ const ResetPassword = () => {
               required
             />
             <button type="submit" className="resetpassword-btn">
-              تعيين كلمة سر جديدة
+              إرسال رابط إعادة تعيين كلمة المرور
             </button>
             {message && <div className="resetpassword-success">{message}</div>}
             {error && <div className="resetpassword-error">{error}</div>}
-            <div className="resetpassword-links-row">
-              <a href="#" className="resetpassword-link">إعادة إرسال بريد التحقق</a>
-            </div>
           </form>
         </div>
       </div>

@@ -12,7 +12,7 @@ class App extends Component {
         <Routes>
           <Route exact path='/' element={<Navigate to="/login"/>}/>
           <Route exact path='/login' element={<Login/>}/>
-          <Route exact path='/resetpassword' element={<ResetPassword/>}/>
+          <Route path="/forgot-password" element={<ResetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange/>}/>
         </Routes>
       </BrowserRouter>

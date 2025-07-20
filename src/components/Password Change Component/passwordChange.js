@@ -13,13 +13,22 @@ const PasswordChange = () => {
   const [error, setError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  // Try to get email from location.state, fallback to localStorage
-  const email = location.state?.email || localStorage.getItem('resetEmail') || "";
+  // Get email from resetEmail in localStorage, or from logged-in user
+  const user = JSON.parse(localStorage.getItem('user') || '{}');
+  const email = localStorage.getItem('resetEmail') || (user.email || "");
+
+  // Extract token from URL query parameters
+  const searchParams = new URLSearchParams(location.search);
+  const token = searchParams.get('token') || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
+    console.log('handleSubmit called');
+    console.log('email:', email);
+    console.log('password:', password);
+    console.log('confirmPassword:', confirmPassword);
     if (password !== confirmPassword) {
       setError("كلمتا المرور غير متطابقتين.");
       return;
@@ -28,10 +37,14 @@ const PasswordChange = () => {
       setError("لا يوجد بريد إلكتروني محدد.");
       return;
     }
+    if (!token) {
+      setError("رمز إعادة تعيين كلمة المرور مفقود.");
+      return;
+    }
     try {
-      const response = await api.post("/changepassword", { email, password });
+      console.log('Sending API request...');
+      const response = await api.post("/change-password", { email, password, password_confirmation: confirmPassword, token });
       setMessage("تم تغيير كلمة المرور بنجاح.");
-      localStorage.removeItem('resetEmail');
       setTimeout(() => {
         navigate('/login');
       }, 1500);
