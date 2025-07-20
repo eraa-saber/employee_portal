@@ -4,11 +4,13 @@ import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
 import eTaxLogo from "../../images/eTax New logo.svg";
 import api from "../../api"; // make sure the path matches your project structure
+import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,6 +20,10 @@ const ResetPassword = () => {
     try {
       const response = await api.post("/resetpassword", { email });
       setMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
+      localStorage.setItem('resetEmail', email);
+      setTimeout(() => {
+        navigate('/passwordchange');
+      }, 1500);
     } catch (err) {
       if (err.response && err.response.status === 404) {
         setError("البريد الإلكتروني غير مسجل.");
