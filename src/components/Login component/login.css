@@ -345,3 +345,87 @@
     padding: 32px 16px 24px 16px;
   }
 }
+
+.error-input {
+  border-color: #ff4444 !important;
+  border-width: 2px !important;
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.3) !important;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 12px;
+  margin-top: 5px;
+  text-align: right;
+  font-weight: bold;
+  animation: fadeIn 0.3s ease-in;
+}
+
+.loading-btn {
+  opacity: 0.7;
+  cursor: not-allowed !important;
+  position: relative;
+}
+
+.loading-btn:hover {
+  transform: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Enhanced input focus states */
+.login-input:focus {
+  outline: none;
+  border-color: #002e6d;
+  box-shadow: 0 0 8px rgba(0, 46, 109, 0.2);
+  transition: all 0.3s ease;
+}
+
+.login-input.error-input:focus {
+  border-color: #ff4444;
+  box-shadow: 0 0 8px rgba(255, 68, 68, 0.3);
+}
+
+/* Language selector enhancements */
+.lang-option {
+  transition: all 0.2s ease;
+}
+
+.lang-option:hover {
+  transform: scale(1.05);
+}
+
+/* Form validation feedback */
+.login-form {
+  position: relative;
+}
+
+/* Loading spinner for button */
+.loading-btn::after {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  margin: auto;
+  border: 2px solid transparent;
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

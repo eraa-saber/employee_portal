@@ -1,33 +1,44 @@
 import React, { useState } from "react";
-import "./resetPassword.css";
+import "./passwordChange.css";
 import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
 import eTaxLogo from "../../images/eTax New logo.svg";
-import api from "../../api"; // make sure the path matches your project structure
-import { useNavigate } from 'react-router-dom';
+import api from "../../api";
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const ResetPassword = () => {
-  const [email, setEmail] = useState("");
+const PasswordChange = () => {
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const location = useLocation();
   const navigate = useNavigate();
+  // Try to get email from location.state, fallback to localStorage
+  const email = location.state?.email || localStorage.getItem('resetEmail') || "";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
     setError("");
-
+    if (password !== confirmPassword) {
+      setError("كلمتا المرور غير متطابقتين.");
+      return;
+    }
+    if (!email) {
+      setError("لا يوجد بريد إلكتروني محدد.");
+      return;
+    }
     try {
-      const response = await api.post("/resetpassword", { email });
-      setMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
-      localStorage.setItem('resetEmail', email);
+      const response = await api.post("/changepassword", { email, password });
+      setMessage("تم تغيير كلمة المرور بنجاح.");
+      localStorage.removeItem('resetEmail');
       setTimeout(() => {
-        navigate('/passwordchange');
+        navigate('/login');
       }, 1500);
     } catch (err) {
-      if (err.response && err.response.status === 404) {
-        setError("البريد الإلكتروني غير مسجل.");
-      } else {  
+      if (err.response && err.response.data && err.response.data.error) {
+        setError(err.response.data.error);
+      } else {
         setError("حدث خطأ. حاول مرة أخرى.");
       }
     }
@@ -48,26 +59,30 @@ const ResetPassword = () => {
           <div className="resetpassword-header">
             <img src={combinedLogo} alt="combined logo" className="resetpassword-combined-logo" draggable="false" />
             <h1 className="resetpassword-title-text">بوابة الموظف</h1>
-            <div className="resetpassword-subtitle-text">للإستعلام عن تفاصيل الأجور الشهرية</div>
+            <div className="resetpassword-subtitle-text">تغيير كلمة المرور</div>
           </div>
           <form className="resetpassword-form" onSubmit={handleSubmit} autoComplete="off">
             <input
-              type="email"
+              type="password"
               className="resetpassword-input"
-              placeholder="البريد الإلكتروني"
+              placeholder="كلمة المرور الجديدة"
               dir="rtl"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <button type="submit" className="resetpassword-btn">
-              تعيين كلمة سر جديدة
-            </button>
+            <input
+              type="password"
+              className="resetpassword-input"
+              placeholder="تأكيد كلمة المرور"
+              dir="rtl"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+            <button type="submit" className="resetpassword-btn">تغيير كلمة المرور</button>
             {message && <div className="resetpassword-success">{message}</div>}
             {error && <div className="resetpassword-error">{error}</div>}
-            <div className="resetpassword-links-row">
-              <a href="#" className="resetpassword-link">إعادة إرسال بريد التحقق</a>
-            </div>
           </form>
         </div>
       </div>
@@ -81,4 +96,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default PasswordChange; 
