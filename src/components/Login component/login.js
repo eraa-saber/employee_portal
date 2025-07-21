@@ -121,9 +121,8 @@ const Login = () => {
       // Show success message, then redirect after 1 second
       setSubmitSuccess(language === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Login successful!');
       setLoading(false);
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 1000);
+      // Redirect to home
+      window.location.href = "/home";
       return;
       
     } catch (error) {
