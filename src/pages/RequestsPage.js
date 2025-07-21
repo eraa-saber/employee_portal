@@ -76,11 +76,35 @@ export default function RequestsPage() {
         );
       });
     } else {
-      // Fallback to old logic if not all fields are filled
-      if (filters.fromYear) result = result.filter(r => r.year >= fromYear);
-      if (filters.toYear) result = result.filter(r => r.year <= toYear);
-      if (filters.fromMonth) result = result.filter(r => getMonthIndex(r.month) >= fromMonth);
-      if (filters.toMonth) result = result.filter(r => getMonthIndex(r.month) <= toMonth);
+      // Improved logic: only compare months if years are equal
+      if (filters.fromYear && filters.fromMonth) {
+        result = result.filter(r => {
+          const rYear = Number(r.year);
+          const rMonth = getMonthIndex(r.month);
+          return (
+            rYear > fromYear ||
+            (rYear === fromYear && rMonth >= fromMonth)
+          );
+        });
+      } else if (filters.fromYear) {
+        result = result.filter(r => Number(r.year) >= fromYear);
+      } else if (filters.fromMonth) {
+        result = result.filter(r => getMonthIndex(r.month) >= fromMonth);
+      }
+      if (filters.toYear && filters.toMonth) {
+        result = result.filter(r => {
+          const rYear = Number(r.year);
+          const rMonth = getMonthIndex(r.month);
+          return (
+            rYear < toYear ||
+            (rYear === toYear && rMonth <= toMonth)
+          );
+        });
+      } else if (filters.toYear) {
+        result = result.filter(r => Number(r.year) <= toYear);
+      } else if (filters.toMonth) {
+        result = result.filter(r => getMonthIndex(r.month) <= toMonth);
+      }
     }
     setFiltered(result);
   };
