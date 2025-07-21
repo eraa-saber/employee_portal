@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./login.css";
 import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
@@ -7,6 +7,8 @@ import UKFlag from "../../images/united-kingdom.svg";
 import eTaxLogo from "../../images/eTax New logo.svg";
 import api from "../../api";
 import { validateEmail, validatePassword, validateForm } from "../../utils/validation";
+
+console.log("Login component mounted");
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -26,7 +28,15 @@ const Login = () => {
 
   const [loading, setLoading] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState('');
   const [language, setLanguage] = useState("ar"); // ar for Arabic, en for English
+
+  useEffect(() => {
+    // Safeguard: If already on /login, prevent any accidental reload/redirect
+    if (window.location.pathname === "/login") {
+      window.history.replaceState(null, "", "/login");
+    }
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -85,6 +95,7 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     setSubmitError('');
+    setSubmitSuccess('');
 
     // Mark all fields as touched and validate
     setTouched({
@@ -101,17 +112,27 @@ const Login = () => {
     }
 
     try {
-      const response = await api.post("/auth/login", formData);
+      const response = await api.post("/login", formData);
       
       // Store token and user data
       localStorage.setItem("access_token", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
       
-      // Redirect to dashboard
-      window.location.href = "/dashboard";
+      // Show success message, then redirect after 1 second
+      setSubmitSuccess(language === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Login successful!');
+      setLoading(false);
+      setTimeout(() => {
+        window.location.href = "/dashboard";
+      }, 1000);
+      return;
       
     } catch (error) {
       setLoading(false);
+      setSubmitSuccess('');
+      // Safeguard: prevent accidental redirect/reload to /login after failed login
+      if (window.location.pathname === "/login") {
+        window.history.replaceState(null, "", "/login");
+      }
       
       if (error.response?.data?.errors) {
         // Backend validation errors
@@ -199,6 +220,19 @@ const Login = () => {
               {submitError}
             </div>
           )}
+          {submitSuccess && (
+            <div className="success-message" style={{
+              color: 'green',
+              textAlign: 'center',
+              marginBottom: '10px',
+              padding: '10px',
+              backgroundColor: '#e6ffe6',
+              borderRadius: '5px',
+              fontWeight: 'bold'
+            }}>
+              {submitSuccess}
+            </div>
+          )}
           
           <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
             <input
@@ -248,7 +282,7 @@ const Login = () => {
             )}
             
             <div className="login-links-row">
-              <a href="/resetpassword" className="login-link">{getText("forgotPassword")}</a>
+              <a href="/forgot-password" className="login-link">{getText("forgotPassword")}</a>
               <a href="#" className="login-link">{getText("resendVerification")}</a>
             </div>
             
