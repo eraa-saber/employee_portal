@@ -2,14 +2,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api',
+  baseURL: 'http://backend2.api/api', // ✅ Updated to match Apache virtual host
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
 });
 
-// Add request interceptor for JWT token
+// ✅ Add request interceptor for JWT token
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem('access_token');
@@ -23,7 +23,7 @@ api.interceptors.request.use(
   }
 );
 
-// Add response interceptor for token refresh/redirect
+// ✅ Add response interceptor for 401 errors
 api.interceptors.response.use(
   (response) => response,
   async (error) => {
