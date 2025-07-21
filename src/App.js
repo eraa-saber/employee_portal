@@ -14,6 +14,8 @@ class App extends Component {
         <Routes>
           <Route exact path='/' element={<Navigate to="/login"/>}/>
           <Route exact path='/login' element={<Login/>}/>
+          <Route exact path='/register' element={<Register />} />
+          <Route exact path='/activate' element={<Activate />} />
           <Route exact path='/resetpassword' element={<ResetPassword/>}/>
           <Route exact path='/passwordchange' element={<PasswordChange/>}/>
         </Routes>
