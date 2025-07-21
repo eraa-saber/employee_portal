@@ -112,7 +112,7 @@ const handleSubmit = async (e) => {
 
     setLoginSuccess(true);
     setTimeout(() => {
-      navigate("/login");
+      navigate("/activate");
     }, 2000);
 
 
