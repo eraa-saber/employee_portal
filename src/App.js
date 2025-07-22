@@ -27,7 +27,7 @@ class App extends Component {
           <Route exact path='/passwordchange' element={<PasswordChange />} />
           {/* New Home and Requests routes */}
           <Route exact path='/home' element={<Home />} />
-          <Route exact path='/requests' element={<div>Requests Page (to be implemented)</div>} />
+          <Route exact path='/requests' element={<RequestsPage/>} />
           {/* Catch-all route for any undefined path */}
           <Route path="*" element={<Navigate to="/error" />} />
           <Route path='/requests' element={

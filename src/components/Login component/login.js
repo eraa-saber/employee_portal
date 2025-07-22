@@ -62,7 +62,7 @@ const Login = () => {
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    
+
     // Mark field as touched
     setTouched(prev => ({
       ...prev,
@@ -79,7 +79,7 @@ const Login = () => {
 
   const handleClick = (e) => {
     const { name } = e.target;
-    
+
     // If field has been touched, re-validate on click
     if (touched[name]) {
       const value = formData[name];
@@ -113,11 +113,11 @@ const Login = () => {
 
     try {
       const response = await api.post("/login", formData);
-      
+
       // Store token and user data
       localStorage.setItem("access_token", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      
+
       // Show success message, then redirect after 1 second
       setSubmitSuccess(language === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Login successful!');
       setLoading(false);
@@ -125,7 +125,7 @@ const Login = () => {
         window.location.href = "/home";
       }, 1000);
       return;
-      
+
     } catch (error) {
       setLoading(false);
       setSubmitSuccess('');
@@ -133,7 +133,7 @@ const Login = () => {
       if (window.location.pathname === "/login") {
         window.history.replaceState(null, "", "/login");
       }
-      
+
       if (error.response?.data?.errors) {
         // Backend validation errors
         const backendErrors = {};
@@ -206,11 +206,11 @@ const Login = () => {
             <h1 className="login-title-text">{getText("title")}</h1>
             <div className="login-subtitle-text">{getText("subtitle")}</div>
           </div>
-          
+
           {submitError && (
-            <div className="error-message" style={{ 
-              color: 'red', 
-              textAlign: 'center', 
+            <div className="error-message" style={{
+              color: 'red',
+              textAlign: 'center',
               marginBottom: '10px',
               padding: '10px',
               backgroundColor: '#ffe6e6',
@@ -233,7 +233,7 @@ const Login = () => {
               {submitSuccess}
             </div>
           )}
-          
+
           <form className="login-form" autoComplete="off" onSubmit={handleSubmit}>
             <input
               type="email"
@@ -247,9 +247,9 @@ const Login = () => {
               onClick={handleClick}
             />
             {errors.email && (
-              <div className="error-message" style={{ 
-                color: 'red', 
-                fontSize: '12px', 
+              <div className="error-message" style={{
+                color: 'red',
+                fontSize: '12px',
                 marginTop: '5px',
                 textAlign: language === "ar" ? 'right' : 'left',
                 fontWeight: 'bold'
@@ -257,7 +257,7 @@ const Login = () => {
                 {errors.email}
               </div>
             )}
-            
+
             <input
               type="password"
               name="password"
@@ -270,9 +270,9 @@ const Login = () => {
               onClick={handleClick}
             />
             {errors.password && (
-              <div className="error-message" style={{ 
-                color: 'red', 
-                fontSize: '12px', 
+              <div className="error-message" style={{
+                color: 'red',
+                fontSize: '12px',
                 marginTop: '5px',
                 textAlign: language === "ar" ? 'right' : 'left',
                 fontWeight: 'bold'
@@ -280,55 +280,59 @@ const Login = () => {
                 {errors.password}
               </div>
             )}
-            
+
             <div className="login-links-row">
               <a href="/forgot-password" className="login-link">{getText("forgotPassword")}</a>
               <a href="#" className="login-link">{getText("resendVerification")}</a>
             </div>
-            
-            <button 
-              type="submit" 
+
+            <button
+              type="submit"
               className={`login-btn ${loading ? 'loading-btn' : ''}`}
               disabled={loading}
             >
               {loading ? "جاري التحميل..." : getText("login")}
             </button>
-            
-            <button type="button" className="login-register-btn">
+
+            <button
+              type="button"
+              className="login-register-btn"
+              onClick={() => window.location.href = "/register"}
+            >
               {getText("noAccount")}
             </button>
           </form>
-          
+
           <div className="login-lang-row-custom">
             <span className="choose-lang-text">{getText("chooseLanguage")}</span>
-            <div 
-              className="lang-option" 
+            <div
+              className="lang-option"
               onClick={() => handleLanguageChange("ar")}
               style={{ cursor: 'pointer' }}
             >
               <span className={`lang-radio ${language === "ar" ? "checked" : ""}`} />
               <img src={EgyptFlag} alt="Egypt flag" className="lang-flag" />
-              <span 
-                className="lang-label-text" 
+              <span
+                className="lang-label-text"
                 style={{
-                  color: language === "ar" ? '#002e6d' : '#828282', 
+                  color: language === "ar" ? '#002e6d' : '#828282',
                   fontWeight: language === "ar" ? 'bold' : 'normal'
                 }}
               >
                 {getText("arabic")}
               </span>
             </div>
-            <div 
-              className="lang-option" 
+            <div
+              className="lang-option"
               onClick={() => handleLanguageChange("en")}
               style={{ cursor: 'pointer' }}
             >
               <span className={`lang-radio ${language === "en" ? "checked" : ""}`} />
               <img src={UKFlag} alt="UK flag" className="lang-flag" />
-              <span 
-                className="lang-label-text" 
+              <span
+                className="lang-label-text"
                 style={{
-                  color: language === "en" ? '#002e6d' : '#828282', 
+                  color: language === "en" ? '#002e6d' : '#828282',
                   fontWeight: language === "en" ? 'bold' : 'normal'
                 }}
               >
