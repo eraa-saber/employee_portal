@@ -8,7 +8,7 @@ import eTaxPhoto from "../../images/Group 5.png";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -88,17 +88,17 @@ const handleSubmit = async (e) => {
 
   try {
     const form = new FormData();
-    form.append("name", formData.username);
-    form.append("email", formData.email);
+    form.append("FullName", formData.username);
+    form.append("Email", formData.email);
     form.append("password", formData.password);
     form.append("password_confirmation", formData.confirmPassword);
-    form.append("phone", formData.phone);
-    form.append("insurance_no", formData.insuranceNumber);
-    form.append("national_id", formData.nationalId);
-    form.append("terms_and_conditions", true);
+    form.append("Phone", formData.phone);
+    form.append("insurranceNo", formData.insuranceNumber);
+    form.append("NationalID", formData.nationalId);
+    form.append("TermsAndConditions", true);
 
     if (formData.nationalIdImage instanceof File) {
-      form.append("doc_url", formData.nationalIdImage);
+      form.append("DocURL", formData.nationalIdImage);
     } else {
       alert("Please upload a valid image.");
       return;
@@ -313,4 +313,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default Login;
+export default Register;
