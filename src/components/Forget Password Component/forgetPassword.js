@@ -1,17 +1,21 @@
-import React, { useState } from "react";
-import "./resetPassword.css";
+import React, { useState, useRef } from "react";
+import "./forgetPassword.css";
 import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
 import eTaxLogo from "../../images/eTax New logo.svg";
 import api from "../../api"; // make sure the path matches your project structure
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const ResetPassword = () => {
+// ForgetPassword component (previously ResetPassword)
+
+const ForgetPassword = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const navigate = useNavigate();
-  const location = useLocation();
+  const [cooldown, setCooldown] = useState(0);
+  const cooldownRef = useRef(null);
+  // const navigate = useNavigate();
+  // const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,12 +23,20 @@ const ResetPassword = () => {
     setError("");
 
     try {
-      const response = await api.post("/forgot-password", { email });
+      await api.post("/forgot-password", { email });
       setMessage("تم إرسال رابط إعادة تعيين كلمة المرور إلى بريدك الإلكتروني.");
       localStorage.setItem('resetEmail', email);
-      setTimeout(() => {
-        navigate(`/passwordchange?token=${response.data.token}`);
-      }, 1500);
+      setCooldown(30);
+      if (cooldownRef.current) clearInterval(cooldownRef.current);
+      cooldownRef.current = setInterval(() => {
+        setCooldown((prev) => {
+          if (prev <= 1) {
+            clearInterval(cooldownRef.current);
+            return 0;
+          }
+          return prev - 1;
+        });
+      }, 1000);
     } catch (err) {
       if (err.response && err.response.status === 404) {
         setError("البريد الإلكتروني غير مسجل.");
@@ -33,6 +45,12 @@ const ResetPassword = () => {
       }
     }
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (cooldownRef.current) clearInterval(cooldownRef.current);
+    };
+  }, []);
 
   return (
     <div className="resetpassword-root">
@@ -60,9 +78,10 @@ const ResetPassword = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              disabled={cooldown > 0}
             />
-            <button type="submit" className="resetpassword-btn">
-              إرسال رابط إعادة تعيين كلمة المرور
+            <button type="submit" className="resetpassword-btn" disabled={cooldown > 0}>
+              {cooldown > 0 ? `انتظر ${cooldown} ثانية لإعادة الإرسال` : "إرسال رابط إعادة تعيين كلمة المرور"}
             </button>
             {message && <div className="resetpassword-success">{message}</div>}
             {error && <div className="resetpassword-error">{error}</div>}
@@ -79,4 +98,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgetPassword;

@@ -1,10 +1,11 @@
 import { Component } from 'react';
 import Login from './components/Login component/login';
 import { BrowserRouter,Route,Routes,Navigate } from 'react-router-dom';
-import ResetPassword from './components/Reset Password Component/resetPassword';
+import ForgetPassword from './components/Forget Password Component/forgetPassword';
 import PasswordChange from './components/Password Change Component/passwordChange';
 import RequestsPage from './pages/RequestsPage';
 import PrivateRoute from './components/PrivateRoute';
+import Register from './components/Register component/register';
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <Routes>
           <Route exact path='/' element={<Navigate to="/login"/>}/>
           <Route exact path='/login' element={<Login/>}/>
-          <Route path="/forgot-password" element={<ResetPassword />} />
+          <Route exact path='/register' element={<Register/>}/>
+          <Route path="/forgot-password" element={<ForgetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange/>}/>
           <Route path='/requests' element={
             <PrivateRoute>

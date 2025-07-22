@@ -8,7 +8,7 @@ import eTaxPhoto from "../../images/Group 5.png";
 import axios from "../../axios";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -70,62 +70,62 @@ const Login = () => {
       newErrors.nationalId = "الرقم القومي يجب أن يحتوي على أرقام فقط";
     }
 
-        if (!formData.nationalIdImage) {
+    if (!formData.nationalIdImage) {
       newErrors.nationalIdImage = "يرجى إرفاق صورة الرقم القومي";
     }
 
     return newErrors;
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  const validationErrors = validateForm();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
 
-  if (Object.keys(validationErrors).length > 0) {
-    setErrors(validationErrors);
-    return;
-  }
-
-  try {
-    const form = new FormData();
-    form.append("name", formData.username);
-    form.append("email", formData.email);
-    form.append("password", formData.password);
-    form.append("password_confirmation", formData.confirmPassword);
-    form.append("phone", formData.phone);
-    form.append("insurance_no", formData.insuranceNumber);
-    form.append("national_id", formData.nationalId);
-    form.append("terms_and_conditions", true);
-
-    if (formData.nationalIdImage instanceof File) {
-      form.append("doc_url", formData.nationalIdImage);
-    } else {
-      alert("Please upload a valid image.");
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
       return;
     }
 
-    const response = await axios.post("/register", form, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
+    try {
+      const form = new FormData();
+      form.append("FullName", formData.username);
+      form.append("Email", formData.email);
+      form.append("password", formData.password);
+      form.append("password_confirmation", formData.confirmPassword);
+      form.append("Phone", formData.phone);
+      form.append("insurranceNo", formData.insuranceNumber);
+      form.append("NationalID", formData.nationalId);
+      form.append("TermsAndConditions", true);
 
-    setLoginSuccess(true);
-    setTimeout(() => {
-      navigate("/login");
-    }, 2000);
+      if (formData.nationalIdImage instanceof File) {
+        form.append("DocURL", formData.nationalIdImage);
+      } else {
+        alert("Please upload a valid image.");
+        return;
+      }
+
+      const response = await axios.post("/register", form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      setLoginSuccess(true);
+      setTimeout(() => {
+        navigate("/activate");
+      }, 2000);
 
 
 
-  } catch (error) {
-    console.error("Registration failed:", error);
-    if (error.response && error.response.data) {
-      alert("فشل التسجيل: " + JSON.stringify(error.response.data.errors || error.response.data));
-    } else {
-      alert("حدث خطأ أثناء الاتصال بالخادم");
+    } catch (error) {
+      console.error("Registration failed:", error);
+      if (error.response && error.response.data) {
+        alert("فشل التسجيل: " + JSON.stringify(error.response.data.errors || error.response.data));
+      } else {
+        alert("حدث خطأ أثناء الاتصال بالخادم");
+      }
     }
-  }
-};
+  };
 
 
 
@@ -313,4 +313,4 @@ const handleSubmit = async (e) => {
   );
 };
 
-export default Login;
+export default Register;

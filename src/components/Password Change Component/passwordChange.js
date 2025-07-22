@@ -15,10 +15,11 @@ const PasswordChange = () => {
   const navigate = useNavigate();
   // Get email from resetEmail in localStorage, or from logged-in user
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-  const email = localStorage.getItem('resetEmail') || (user.email || "");
+  const searchParams = new URLSearchParams(location.search);
+  const emailFromUrl = searchParams.get('email') || "";
+  const email = localStorage.getItem('resetEmail') || emailFromUrl || (user.email || "");
 
   // Extract token from URL query parameters
-  const searchParams = new URLSearchParams(location.search);
   const token = searchParams.get('token') || "";
 
   const handleSubmit = async (e) => {
