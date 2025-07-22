@@ -21,7 +21,6 @@ export default function Navbar() {
           <NavLink to="/home" className={({ isActive }) => (isActive ? 'active' : '')}>الرئيسية</NavLink>
           <NavLink to="/profile" className={({ isActive }) => (isActive ? 'active' : '')}>الصفحة الشخصية</NavLink>
           <NavLink to="/requests" className={({ isActive }) => (isActive ? 'active' : '')}>طلباتي</NavLink>
-          <NavLink to="/error" className={({ isActive }) => (isActive ? 'active' : '')}>طلباتي</NavLink>
         </div>
       </div>
       <div className="navbar-right">
