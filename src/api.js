@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://backend2.api/api', // ✅ Updated to match Apache virtual host
+  baseURL: 'http://backend.api/api', // ✅ Updated to match Apache virtual host
   headers: {
     'Content-Type': 'application/json',
     'Accept': 'application/json',

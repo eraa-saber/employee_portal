@@ -122,7 +122,7 @@ const Login = () => {
       setSubmitSuccess(language === 'ar' ? 'تم تسجيل الدخول بنجاح!' : 'Login successful!');
       setLoading(false);
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/home";
       }, 1000);
       return;
       

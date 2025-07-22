@@ -6,6 +6,7 @@ import Error from './components/Error Component/error';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import ResetPassword from './components/Reset Password Component/resetPassword';
 import PasswordChange from './components/Password Change Component/passwordChange';
+import Home from './components/Home';
 
 class App extends Component {
   render() {
@@ -19,9 +20,10 @@ class App extends Component {
           <Route exact path='/activate' element={<Activate />} />
           <Route path='/forgot-password' element={<ResetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
-          
+          {/* New Home and Requests routes */}
+          <Route exact path='/home' element={<Home />} />
+          <Route exact path='/requests' element={<div>Requests Page (to be implemented)</div>} />
           {/* Catch-all route for any undefined path */}
-          
           <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       </BrowserRouter>
