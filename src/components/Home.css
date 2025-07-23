@@ -1,0 +1,320 @@
+.home-image-section, .home-image-full {
+  display: none !important;
+}
+
+.home-root {
+  min-height: 100vh;
+  width: 100vw;
+  position: relative;
+  background: url('../images/images for home page/Mask Group 15.png') no-repeat center center, #fff;
+  background-size: cover;
+}
+
+.home-container {
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  max-width: 1500px;
+  width: 100%;
+  min-height: 600px;
+  height: 80vh;
+  flex-direction: row;
+  padding: 0;
+  position: relative;
+  margin: 0 auto;
+  gap: 0;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.home-form-section {
+  direction: rtl;
+  text-align: right;
+  margin-top: 6vh;
+  background: rgba(255,255,255,0.97); /* more solid white for card */
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 1.5px 6px rgba(0,0,0,0.08); /* stronger shadow */
+  padding: 50px 50px;
+  width: auto;
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-header {
+  text-align: right;
+  margin-bottom: 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.home-title-svg {
+  width: 180px;
+  height: 40px;
+  margin-bottom: 2px;
+}
+
+.home-subtitle-svg {
+  width: 260px;
+  height: 28px;
+  margin-bottom: 8px;
+}
+
+.home-form {
+  direction: rtl;
+  text-align: right;
+  width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-end;
+  margin-left: 0;
+}
+
+.home-form-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 18px;
+  position: relative;
+  width: 100%;
+  height: 78px;
+  flex-direction: row-reverse;
+}
+
+.home-label {
+  min-width: 60px;
+  color: #002e6d;
+  font-size: 18px;
+  font-family: Arial, ArialMT, sans-serif;
+  font-weight: 700;
+}
+
+.home-input {
+  width: 100%;
+  max-width: 520px;
+  padding: 8px 12px;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  font-size: 18px;
+  background: #f9f9f9;
+  outline: none;
+  transition: border 0.2s;
+  height: 78px;
+  flex: 1;
+}
+
+.home-input:focus {
+  border: 1.5px solid #438FCE;
+  background: #fff;
+}
+
+.home-password-svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+}
+
+.home-btn {
+  background: #438FCE;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 0;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 12px;
+  transition: background 0.2s;
+}
+
+.home-btn:hover {
+  background: #002E6D;
+}
+
+.home-footer-absolute-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #fff;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.04);
+  padding: 8px 0;
+}
+
+.home-footer-text-with-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.home-etax-logo {
+  height: 28px;
+  width: auto;
+  vertical-align: middle;
+}
+
+.home-footer-text {
+  color: #002e6d;
+  font-size: 25px;
+  font-family: Arial, ArialMT, sans-serif;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-title-subtitle-svg {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  margin-bottom: 24px;
+}
+
+.home-icon-svg {
+  width: 32px;
+  height: 32px;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.home-box-svg {
+  width: 120px;
+  height: 40px;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+.home-btn-svg {
+  width: 340px;
+  height: 48px;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 18px;
+  margin-left: 0;
+  margin-right: 0;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.home-btn-box-bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  pointer-events: none;
+  display: block;
+}
+
+.home-button-svg-on-box {
+  position: relative;
+  z-index: 2;
+  width: 120px;
+  height: 32px;
+  display: block;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.home-input,
+.home-btn-svg {
+  font-size: 16px;
+  height: 48px;
+}
+
+.home-form-row {
+  height: 48px;
+}
+
+.home-group8-wrapper {
+  width: 520px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.home-group8-svg {
+  width: 120px;
+  height: auto;
+  opacity: 0.7;
+}
+
+.home-box-size {
+  width: 500px !important;
+  max-width: 500px !important;
+  min-width: 500px !important;
+  height: 60px !important;
+  box-sizing: border-box;
+  display: block;
+}
+
+.home-error-message {
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  text-align: right;
+  font-family: Arial, ArialMT, sans-serif;
+  font-weight: bold;
+  width: 340px;
+}
+
+@media (max-width: 900px) {
+  .home-container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .home-image-section {
+    width: 100vw;
+    height: 60vh; /* or try 100vh if you want it to fill the screen */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  .home-image-full {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* or use cover for full fill */
+  }
+
+  .home-form-section {
+    padding: 32px 16px 24px 16px;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+
+  .home-title-subtitle-svg,
+  .home-form,
+  .home-group8-wrapper {
+    width: 100%;
+    max-width: 100vw;
+  }
+  .home-group8-svg {
+    width: 90px;
+  }
+} 
