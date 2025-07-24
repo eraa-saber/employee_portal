@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import Navbar from './Navbar';
+import Navbar from '../Navbar';
 import axios from 'axios'; // Add this at the top
-import './Home.css';
+import '../Home.css';
 // import leftImage from '../images/images for home page/Group 9.png'; // REMOVE
-import footerSvg from '../images/images for home page/جميع الحقوق محفوظة . مدعوم من.svg';
-import titleSubtitleSvg from '../images/images for home page/home (1).svg';
-import buttonSvg from '../images/images for home page/إستعلام عن الراتب.svg';
-import calendarIcon from '../images/images for home page/Icon feather-calendar.svg';
-import lockIcon from '../images/images for home page/Icon feather-lock.svg';
-import group8 from '../images/images for home page/Group 8.svg';
-import etaxLogo from '../images/images for home page/eTax New logo.svg';
-import boxSvg from '../images/images for home page/Rectangle 1631.svg';
-import bgImage from '../images/images for home page/Mask Group 15.png';
+import footerSvg from '../../images/images for home page/جميع الحقوق محفوظة . مدعوم من.svg';
+import titleSubtitleSvg from '../../images/images for home page/home (1).svg';
+import buttonSvg from '../../images/images for home page/إستعلام عن الراتب.svg';
+import calendarIcon from '../../images/images for home page/Icon feather-calendar.svg';
+import lockIcon from '../../images/images for home page/Icon feather-lock.svg';
+import group8 from '../../images/images for home page/Group 8.svg';
+import etaxLogo from '../../images/images for home page/eTax New logo.svg';
+import boxSvg from '../../images/images for home page/Rectangle 1631.svg';
+import bgImage from '../../images/images for home page/Mask Group 15.png';
 
 export default function Home() {
   const [month, setMonth] = useState('');

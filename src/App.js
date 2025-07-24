@@ -7,25 +7,44 @@ import Profile from './components/Profile Component/profile';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import ResetPassword from './components/Reset Password Component/resetPassword';
 import PasswordChange from './components/Password Change Component/passwordChange';
-import Home from './components/Home';
+import Home from './components/Home Component/Home';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <Routes>
+          {/* Public Routes */}
           <Route exact path='/' element={<Navigate to="/login" />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/register' element={<Register />} />
-          <Route exact path='/error' element={<Error />} />
-          <Route exact path='/profile' element={<Profile />} />
           <Route exact path='/activate' element={<Activate />} />
           <Route path='/forgot-password' element={<ResetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
-          {/* New Home and Requests routes */}
-          <Route exact path='/home' element={<Home />} />
-          <Route exact path='/requests' element={<div>Requests Page (to be implemented)</div>} />
-          {/* Catch-all route for any undefined path */}
+          <Route exact path='/error' element={<Error />} />
+
+          {/* Protected Routes */}
+          <Route
+            exact
+            path='/home'
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Catch-all route */}
           <Route path="*" element={<Navigate to="/error" />} />
         </Routes>
       </BrowserRouter>

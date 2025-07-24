@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
+import axios from 'axios'; // Add this at the top
 import './Home.css';
 // import leftImage from '../images/images for home page/Group 9.png'; // REMOVE
 import footerSvg from '../images/images for home page/جميع الحقوق محفوظة . مدعوم من.svg';
@@ -32,13 +33,42 @@ export default function Home() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
-    window.location.href = '/requests';
-  };
+ 
+
+// ... inside your Home component:
+const [salaryData, setSalaryData] = useState(null); // Add this line
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const validationErrors = validate();
+  setErrors(validationErrors);
+  setSalaryData(null); // Clear previous result
+  if (Object.keys(validationErrors).length > 0) return;
+
+  try {
+    // Get JWT token from localStorage (or wherever you store it)
+    const token = localStorage.getItem('token');
+    const response = await axios.post(
+      'http://localhost:8000/api/salary-inquiry',
+      { month, year, password },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (response.data.errors) {
+      setErrors(response.data.errors);
+    } else if (response.data.data) {
+      setSalaryData(response.data.data);
+      setErrors({});
+    }
+  } catch (err) {
+    setErrors({ general: 'حدث خطأ في الاتصال بالخادم' });
+  }
+};
 
   return (
     <div className="home-root">
