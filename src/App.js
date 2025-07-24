@@ -16,12 +16,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <Routes>
+          {/* Public Routes */}
           <Route exact path='/' element={<Navigate to="/login" />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/register' element={<Register/>}/>
           <Route exact path='/register' element={<Register />} />
-          <Route exact path='/error' element={<Error />} />
-          <Route exact path='/profile' element={<Profile />} />
           <Route exact path='/activate' element={<Activate />} />
           <Route path='/forgot-password' element={<ForgetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
@@ -29,6 +28,29 @@ class App extends Component {
           <Route exact path='/home' element={<Home />} />
           <Route exact path='/requests' element={<RequestsPage/>} />
           {/* Catch-all route for any undefined path */}
+          <Route exact path='/error' element={<Error />} />
+
+          {/* Protected Routes */}
+          <Route
+            exact
+            path='/home'
+            element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            exact
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
+          {/* Catch-all route */}
           <Route path="*" element={<Navigate to="/error" />} />
           <Route path='/requests' element={
             <PrivateRoute>
