@@ -29,7 +29,7 @@ export default function Profile() {
         });
         setUser(response.data);
         setPhone(response.data.phone); // ✅ Set initial phone
-        setInsuranceNo(response.data.insurranceNo); // ✅ Set initial insurance number
+        setInsuranceNo(response.data.insuranceNo); // ✅ Set initial insurance number
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -53,7 +53,7 @@ export default function Profile() {
         "http://127.0.0.1:8000/api/update-profile",
         {
           phone: phone,
-          insurranceNo: insuranceNo,
+          insuranceNo: insuranceNo,
         },
         {
           headers: {

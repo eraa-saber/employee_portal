@@ -93,7 +93,7 @@ const Register = () => {
       form.append("password", formData.password);
       form.append("password_confirmation", formData.confirmPassword);
       form.append("Phone", formData.phone);
-      form.append("insurranceNo", formData.insuranceNumber);
+      form.append("insuranceNo", formData.insuranceNumber);
       form.append("NationalID", formData.nationalId);
       form.append("TermsAndConditions", true);
 
@@ -283,7 +283,13 @@ const Register = () => {
             {/* Buttons */}
             <div className="login-buttons">
               <button type="submit" className="login-btn">إنشاء حساب جديد</button>
-              <button type="button" className="login-register-btn">لدي حساب بالفعل</button>
+              <button
+                type="button"
+                className="login-register-btn"
+                onClick={() => window.location.href = "/login"}
+              >
+                لدي حساب بالفعل
+              </button>
             </div>
           </form>
 
