@@ -9,6 +9,7 @@ import PasswordChange from './components/Password Change Component/passwordChang
 import Home from './components/Home Component/Home';
 import PrivateRoute from './components/PrivateRoute';
 import RequestsPage from './pages/RequestsPage';
+import Register from './components/Register component/register';
 
 class App extends Component {
   render() {
@@ -23,7 +24,6 @@ class App extends Component {
           <Route path='/forgot-password' element={<ForgetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
           {/* New Home and Requests routes */}
-          <Route exact path='/home' element={<Home />} />
           <Route exact path='/requests' element={<RequestsPage/>} />
           {/* Catch-all route for any undefined path */}
           <Route exact path='/error' element={<Error />} />

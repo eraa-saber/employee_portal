@@ -232,8 +232,8 @@ export default function Profile() {
     </div> {/* <-- This was missing! */}
 
     <div className="Profile-footer">
-      <img src={eTaxLogo} alt="eTax logo" className="Profile-etax-logo" />
       <span className="Profile-footer-text">جميع الحقوق محفوظة . مدعوم من</span>
+      <img src={eTaxLogo} alt="eTax logo" className="Profile-etax-logo" />
     </div>
   </>
 );

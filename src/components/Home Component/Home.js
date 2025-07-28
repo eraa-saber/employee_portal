@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '../Navbar';
-import axios from 'axios'; // Add this at the top
 import './Home.css';
-// import leftImage from '../../images/images for home page/Group 9.png'; // REMOVE
+import api from '../../api';
 import footerSvg from '../../images/images for home page/جميع الحقوق محفوظة . مدعوم من.svg';
 import titleSubtitleSvg from '../../images/images for home page/home (1).svg';
 import buttonSvg from '../../images/images for home page/إستعلام عن الراتب.svg';
@@ -11,7 +10,6 @@ import lockIcon from '../../images/images for home page/Icon feather-lock.svg';
 import group8 from '../../images/images for home page/Group 8.svg';
 import etaxLogo from '../../images/images for home page/eTax New logo.svg';
 import boxSvg from '../../images/images for home page/Rectangle 1631.svg';
-import bgImage from '../../images/images for home page/Mask Group 15.png';
 
 export default function Home() {
   const [month, setMonth] = useState('');
@@ -33,13 +31,30 @@ export default function Home() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const validationErrors = validate();
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length > 0) return;
-    window.location.href = '/requests';
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const validationErrors = validate();
+        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length > 0) return;
+
+        try {
+          // Send month as Arabic string as requested
+          const response = await api.post('/home', {
+            month: month,
+            year,
+            password
+          });
+          if (response.data.errors) {
+            setErrors(response.data.errors);
+            return;
+          }
+          // handle response here
+          window.location.href = '/requests';
+        } catch (error) {
+          // handle error here
+          setErrors({ api: 'حدث خطأ أثناء إرسال الطلب' });
+        }
+      };
 
   return (
     <div className="home-root">
@@ -111,4 +126,4 @@ export default function Home() {
       </div>
     </div>
   );
-} 
+}
