@@ -6,10 +6,9 @@ import Profile from './components/Profile Component/profile';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import ForgetPassword from './components/Forget Password Component/forgetPassword';
 import PasswordChange from './components/Password Change Component/passwordChange';
-import RequestsPage from './pages/RequestsPage';
+import Home from './components/Home Component/Home';
 import PrivateRoute from './components/PrivateRoute';
-import Register from './components/Register component/register';
-import Home from './components/Home';
+import RequestsPage from './pages/RequestsPage';
 
 class App extends Component {
   render() {
@@ -28,6 +27,7 @@ class App extends Component {
           <Route exact path='/requests' element={<RequestsPage/>} />
           {/* Catch-all route for any undefined path */}
           <Route exact path='/error' element={<Error />} />
+                                                    
 
           {/* Protected Routes */}
           <Route
@@ -48,6 +48,11 @@ class App extends Component {
               </PrivateRoute>
             }
           />
+          <Route path='/requests' element={
+            <PrivateRoute>
+              <RequestsPage />
+            </PrivateRoute>
+          } />
 
           {/* Catch-all route */}
           <Route path="*" element={<Navigate to="/error" />} />
