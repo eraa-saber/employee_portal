@@ -20,7 +20,6 @@ class App extends Component {
           <Route exact path='/' element={<Navigate to="/login" />} />
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/register' element={<Register/>}/>
-          <Route exact path='/register' element={<Register />} />
           <Route exact path='/activate' element={<Activate />} />
           <Route path='/forgot-password' element={<ForgetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
@@ -57,8 +56,6 @@ class App extends Component {
               <RequestsPage />
             </PrivateRoute>
           } />
-          <Route path='/home' element={<PrivateRoute><div /></PrivateRoute>} />
-          <Route path='/profile' element={<PrivateRoute><div /></PrivateRoute>} />
         </Routes>
       </BrowserRouter>
     );
