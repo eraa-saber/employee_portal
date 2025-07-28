@@ -1,0 +1,198 @@
+body, html, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.navbar {
+  display: flex;
+  justify-content: center; /* Center the links */
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  gap: 3rem; /* Add gap between link block and actions */
+}
+.navbar-links {
+  display: flex;
+  gap: 1.5rem;
+}
+/* Remove logo and right/left specific styles */
+ 
+.page-container {
+  max-width: 1400px; /* Widen the container */
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px); /* Fine-tuned height adjustment */
+  box-sizing: border-box; /* Include padding in height calculation */
+}
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #333;
+}
+.content-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 1.5rem;
+  flex-grow: 1; /* Allow card to grow and fill space */
+  display: flex;
+  flex-direction: column;
+}
+.table-container-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+.requests-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+  flex-grow: 1; /* Make table fill the wrapper */
+}
+.requests-table th, .requests-table td {
+  border: none; /* Hide table lines */
+  padding: 1.5rem 0.75rem; /* Increased padding */
+  text-align: center;
+  font-size: 1.1rem; /* Increased font size */
+}
+.requests-table th {
+  background: #002b5c; /* Dark blue from screenshot */
+  color: #fff;
+  font-weight: bold;
+}
+.alt-row {
+  background-color: #dee2e6; /* Even darker grey for alternating rows */
+}
+.pagination {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  display: inline-flex;
+}
+.pagination button {
+  border: none;
+  border-left: 1px solid #ddd;
+  background: #fff;
+  color: #337ab7;
+  padding: 0.3rem 0.8rem;
+  cursor: pointer;
+}
+.pagination button:last-child {
+  border-left: none;
+}
+.pagination button.active {
+  background: #f5f5f5;
+  font-weight: bold;
+}
+.requests-footer {
+  text-align: center;
+  margin-top: auto;
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 60px;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+  width: 100vw;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+.requests-search {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  justify-content: space-between; /* Pushes button and inputs apart */
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.search-inputs {
+  display: flex;
+  flex-grow: 1; /* Allow the container to take up available space */
+  justify-content: space-between; /* Spread the inputs evenly */
+  gap: 1.5rem;
+}
+.requests-search input {
+  padding: 0.6rem 0.8rem; /* Reduced padding */
+  font-size: 0.95rem; /* Reduced font size */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: none;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+ 
+/* Hide the arrows on number inputs */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+.requests-search input:focus {
+  border-color: #0d6efd;
+}
+.search-btn {
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 2rem; /* Bigger button */
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1rem; /* Bigger text */
+  transition: background-color 0.2s ease;
+}
+.search-btn:hover {
+  background-color: #0b5ed7; /* Darker on hover */
+}
+.page-footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 2rem 0; /* Increased padding */
+  color: #555;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem; /* Increased gap */
+  border-top: 1px solid #eee;
+  font-size: 1.1rem; /* Increased font size */
+}
+.page-footer img {
+  height: 28px; /* Increased logo size */
+}
+.date-input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-grow: 0; /* Prevent the wrapper from growing */
+}
+.date-input-wrapper input {
+  width: 150px; /* Set a fixed width for the inputs */
+}
+.date-input-wrapper img {
+  position: absolute;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 18px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+ 
