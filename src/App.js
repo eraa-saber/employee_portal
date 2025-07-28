@@ -7,8 +7,9 @@ import Profile from './components/Profile Component/profile';
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import ResetPassword from './components/Reset Password Component/resetPassword';
 import PasswordChange from './components/Password Change Component/passwordChange';
-import Home from './components/Home';
+import Home from './components/Home Component/Home';
 import PrivateRoute from './components/PrivateRoute';
+import RequestsPage from './pages/RequestsPage';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <Route path='/forgot-password' element={<ResetPassword />} />
           <Route exact path='/passwordchange' element={<PasswordChange />} />
           <Route exact path='/error' element={<Error />} />
+                                                    
 
           {/* Protected Routes */}
           <Route
@@ -43,6 +45,11 @@ class App extends Component {
               </PrivateRoute>
             }
           />
+          <Route path='/requests' element={
+            <PrivateRoute>
+              <RequestsPage />
+            </PrivateRoute>
+          } />
 
           {/* Catch-all route */}
           <Route path="*" element={<Navigate to="/error" />} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import "./login.css";
 import leftImage from "../../images/Group 13.png";
 import combinedLogo from "../../images/Group 131.png";
@@ -30,6 +31,7 @@ const Login = () => {
   const [submitError, setSubmitError] = useState('');
   const [submitSuccess, setSubmitSuccess] = useState('');
   const [language, setLanguage] = useState("ar"); // ar for Arabic, en for English
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Safeguard: If already on /login, prevent any accidental reload/redirect
@@ -293,8 +295,7 @@ const Login = () => {
             >
               {loading ? "جاري التحميل..." : getText("login")}
             </button>
-            
-            <button type="button" className="login-register-btn">
+            <button type="button" className="login-register-btn" onClick={() => navigate('/register')}>
               {getText("noAccount")}
             </button>
           </form>
